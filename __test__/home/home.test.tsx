@@ -7,6 +7,10 @@ import { StackParamList } from '../../App'
 
 describe("Test component Home", () => {
 
+  afterEach(() => {
+    (global as any).mockedRouteName = "user";
+  })
+
   it("deve renderizar o texto no componente inicial", () => {
     const { getByText } = render(<Home/>)
     expect(getByText("Página home!")).toBeTruthy();
@@ -28,6 +32,8 @@ describe("Test component Home", () => {
   })
 
   it("deve navegar para a tela do usuário quando o botão for pressionado", async () => {
+    (global as any).mockedRouteName = "user";
+
     const { getByText } = render(<Home/>)
 
     const button = getByText("User")
@@ -39,6 +45,22 @@ describe("Test component Home", () => {
       expect(navigate).toHaveBeenCalledWith("user", { name: "Herberton Miguel"} )
     })
 
+
+  })
+
+  it("deve navegar até a tela de contato quando o botão for pressionado", async () => {
+    (global as any).mockedRouteName = "contato";
+
+    const { getByText } = render(<Home/>)
+
+    const buttonContato = getByText("Contato")
+    fireEvent.press(buttonContato);
+
+    const { navigate } = useNavigation<NativeStackNavigationProp<StackParamList>>();
+
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith("contato", { telefone: "99101010"} )
+    })
 
   })
 
