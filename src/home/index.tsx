@@ -12,6 +12,8 @@ export function Home() {
     <Text>Página home!</Text>
 
     <Button title="Perfil" onPress={() => navigation.navigate("profile") }/>
+
+    <Button title="User" onPress={() => navigation.navigate("user", { name: "Herberton Miguel"}) }/>
    </View>
   );
 }
