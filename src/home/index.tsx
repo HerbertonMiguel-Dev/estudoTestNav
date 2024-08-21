@@ -14,6 +14,8 @@ export function Home() {
     <Button title="Perfil" onPress={() => navigation.navigate("profile") }/>
 
     <Button title="User" onPress={() => navigation.navigate("user", { name: "Herberton Miguel"}) }/>
+
+    <Button title="Contato" onPress={() => navigation.navigate("contato", { telefone: "99101010" }) }/>
    </View>
   );
 }
