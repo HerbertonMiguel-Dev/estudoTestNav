@@ -27,4 +27,19 @@ describe("Test component Home", () => {
 
   })
 
+  it("deve navegar para a tela do usuário quando o botão for pressionado", async () => {
+    const { getByText } = render(<Home/>)
+
+    const button = getByText("User")
+    fireEvent.press(button);
+
+    const { navigate } = useNavigation<NativeStackNavigationProp<StackParamList>>();
+
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith("user", { name: "Herberton Miguel"} )
+    })
+
+
+  })
+
 })
